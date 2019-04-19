@@ -5,9 +5,9 @@
   </header>
 
   <div class="order-summary jumbotron">
-    <h4>Thank you for your order, <%= User.find_by_email(@order.email).name %> At <%= @order.created_at %> 
+    <h4>Thank you for your order, email confirmation sent to : <%= User.find_by_email(@order.email).email %>. Order submitted at <%= @order.created_at %> 
     </h4>
-    # </h4> // return email that exists, must not return nil. If doesnt exist return to placeholder if else
+    # Add before_save method to block guest users from accessing other orders
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
