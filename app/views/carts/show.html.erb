@@ -2,6 +2,7 @@
 
   <header class="page-header">
     <h1>My Cart</h1>
+    
   </header>
 
   <div class="panel panel-default items">
@@ -39,10 +40,10 @@
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-amount="<%= cart_subtotal_cents %>"
-          data-name="Jungle"
-          data-description="Khurram Virani's Jungle Order"
+          data-name="Ecommerce App"
+          data-description="<%= @wiggle.name %>'s Order"
           data-locale="auto"
-          data-email="kvirani@gmail.com"
+          data-email="<%= @wiggle.email %>"
           data-currency="cad">
         </script>
       <% end %>

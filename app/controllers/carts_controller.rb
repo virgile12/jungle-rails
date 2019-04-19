@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
 
   def show
+    @wiggle = User.find(session[:user_id])
   end
 
   def add_item

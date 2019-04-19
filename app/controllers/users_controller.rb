@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
     def new
     end
-    
+
     def create
     user = User.new(user_params)
       if user.save
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
         flash[:success] = "Signup Successful !"
         redirect_to '/'
       else
+        # // case for each possibilities  for mame , email password
         flash[:warning] = "Invalid Email or Password"
         redirect_to '/signup'
       end

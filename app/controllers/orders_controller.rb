@@ -2,6 +2,12 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @line_items = LineItem.where order_id: @order.id
+    @items = []
+    @line_items.each do |line_item|
+      product = Product.find(line_item.product_id)
+      @items.push(product)
+    end
   end
 
   def create
@@ -10,11 +16,11 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
-      redirect_to order, notice: 'Your Order has been placed.'
+      redirect_to order, notice: 'Order Sucessfully Submitted'
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
-    end
-
+    end 
+  
   rescue Stripe::CardError => e
     redirect_to cart_path, flash: { error: e.message }
   end
