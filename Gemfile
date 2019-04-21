@@ -26,7 +26,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Adding confirmation email receipts as a PDF format
+# actionmailer for email confirmation receipts
+gem 'actionview'
+gem 'actionmailer'
+gem 'activejob'
+gem 'actionpack'
+
 gem 'receipts'
 
 gem 'puma'

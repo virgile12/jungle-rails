@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
       product = Product.find(line_item.product_id)
       @items.push(product)
     end
+    @receipt = Receipt.find_by(order_id: @order.id)
   end
 
   def create
@@ -16,6 +17,11 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
+      @receipt = Receipt.new(
+        order_id: order.id,
+        user_id: session[:user_id]  
+      )
+      @receipt.save
       redirect_to order, notice: 'Order Sucessfully Submitted'
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
@@ -28,7 +34,7 @@ class OrdersController < ApplicationController
   private
 
   def empty_cart!
-    # empty hash means no products in cart :)
+    # No product in cart --
     update_cart({})
   end
 
@@ -36,7 +42,7 @@ class OrdersController < ApplicationController
     Stripe::Charge.create(
       source:      params[:stripeToken],
       amount:      cart_subtotal_cents,
-      description: "Khurram Virani's Jungle Order",
+      description: "Ecommerce Transaction",
       currency:    'cad'
     )
   end
@@ -61,5 +67,11 @@ class OrdersController < ApplicationController
     order.save!
     order
   end
+
+  def send_email(order)
+    @order = order
+    Mailer.order_receipt(@order).deliver_later
+  end
+
 
 end
