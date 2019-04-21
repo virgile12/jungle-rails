@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
   
       @user = user
       @order  = order
-      mail(to: @order.email, subject: "Thank you for your purchase. Id : #{@order.id}")
+      mail(to: @user.email, subject: "Thank you for your purchase. Id : #{@order.id}")
     end
   
   end

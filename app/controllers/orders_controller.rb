@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
+      # pdf receipt here !
       @receipt = Receipt.new(
         order_id: order.id,
         user_id: session[:user_id]  
@@ -66,11 +67,6 @@ class OrdersController < ApplicationController
     end
     order.save!
     order
-  end
-
-  def send_email(order)
-    @order = order
-    Mailer.order_receipt(@order).deliver_later
   end
 
 

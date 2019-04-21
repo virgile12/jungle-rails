@@ -1,6 +1,6 @@
 class ReceiptsController < ApplicationController
     # before_action :authenticate_with_http_digest
-    # before_action :set_receipt only: [:show]
+    before_action :set_receipt only: [:show]
 
     def index
       @receipts = Receipt.all
@@ -50,9 +50,9 @@ class ReceiptsController < ApplicationController
     #     end
     # end
   
-    # private
+    private
   
-      # def set_receipt
-      #   @receipt = current_user.receipts.find(params[:id])
-      # end
+      def set_receipt
+        @receipt = current_user.receipts.find(params[:id])
+      end
 end
