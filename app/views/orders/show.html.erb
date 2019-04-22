@@ -4,7 +4,7 @@
     <h1>Order <%= @order.id %></h1>
   </header>
   
-  <% UserMailer.order_email(current_user, @order).deliver_now %>
+  
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order, email confirmation sent to : <%= User.find_by_email(@order.email).email %>. Order submitted at <%= @order.created_at %>
@@ -38,6 +38,10 @@
     </table>
   </div>  
 </div>
+
+
+<% UserMailer.order_email(@user, @order, @total_amount).deliver_now %>
+
 <%= link_to "Download Receipt", receipt_path(@receipt, format: :pdf), class: 'btn btn-lg btn-primary' %>
 
 <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>

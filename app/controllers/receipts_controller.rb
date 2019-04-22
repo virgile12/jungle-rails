@@ -1,6 +1,6 @@
 class ReceiptsController < ApplicationController
     # before_action :authenticate_with_http_digest
-    before_action :set_receipt only: [:show]
+    before_action :set_receipt only: [:show, :index, :new, :create, :set_receipt]
 
     def index
       @receipts = Receipt.all

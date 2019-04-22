@@ -69,5 +69,15 @@ class OrdersController < ApplicationController
     order
   end
 
+    # Total cart price in $ for view purposes (not full cents like stripe)
+  def dollar_total
+    total = 0
+    cart.each do |product_id, details|
+      if p = Product.find_by(id: product_id)
+        total += p.price_cents * details['quantity'].to_i
+      end
+    end
+    total
+  end
 
 end

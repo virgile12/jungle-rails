@@ -4,14 +4,50 @@ _<!DOCTYPE html>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>RECEIPT FOR CHARGE : <%= @order.id %> </h1>
+  <h1>Thanks for choosing E-commerce <%= @user_name %>!</h1>
+  <h1>RECEIPT FOR CHARGE : <%= @order.id %> </h1>
     <h2>Date: <%= @order.created_at %></h2>
-    <h2> Billed to :</h2>
+    <h2> Billed to :<%= @order.email %> </h2>
     <p>
       Thank you for your order!<br>
       We have successfully received payment for your recent purchase. Please keep this receipt for your own records.
     <p>
-      On behalf of the E-commerce Staff, thank you for choosing e-commerce !
+      On behalf of the E-commerce Staff, we value your patronage with the upmost sincerity !
+      
+      <p>
+        Details of your order are listed below:
+      </p>
     </p>
+
+    <table>
+  <tr>
+    <td><b>Product: </b></td>
+    <td><b>Item Price</b></td>
+    <td><b>Quantity</b></td>
+    <td><b>Total_price</b></td>
+  </tr>
+
+  <% items = LineItem.where(order_id: @order.id) %>
+  <% items.each do |item| %>
+    <% product = Product.find_by(id: item.product_id) %>
+    <tr>
+      <td><%= product.name %></td>
+      <td><%= item.item_price %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.total_price %></td>
+    </tr>
+  <% end %>
+
+  <tr>
+    <td colspan=3><b>Total amount:</b></td>
+    <td><b><%= @total_amount %></b></td>
+  </tr>
+
   </body>
 </html>     
+
+
+
+
+
+
