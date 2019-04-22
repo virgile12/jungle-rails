@@ -40,7 +40,7 @@
 </div>
 
 
-<% UserMailer.order_email(@user, @order, @total_amount).deliver_now %>
+# <% UserMailer.order_email(@user, @order, @total_amount).deliver_now %>
 
 <%= link_to "Download Receipt", receipt_path(@receipt, format: :pdf), class: 'btn btn-lg btn-primary' %>
 

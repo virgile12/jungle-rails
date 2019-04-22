@@ -5,7 +5,7 @@ _<!DOCTYPE html>
   </head>
   <body>
   <h1>Thanks for choosing E-commerce <%= @user_name %>!</h1>
-  <h1>RECEIPT FOR CHARGE : <%= @order.id %> </h1>
+  <h1>Order confirmation ID : <%= @order.id %> </h1>
     <h2>Date: <%= @order.created_at %></h2>
     <h2> Billed to :<%= @order.email %> </h2>
     <p>
@@ -20,29 +20,18 @@ _<!DOCTYPE html>
     </p>
 
     <table>
+    <% items = LineItem.where(order_id: @order.id) %>
+    <% items.each do |item| %>
+      <% product = Product.find_by(id: item.product_id) %>
   <tr>
-    <td><b>Product: </b></td>
-    <td><b>Item Price</b></td>
-    <td><b>Quantity</b></td>
-    <td><b>Total_price</b></td>
+    <td><b>Product <%= product.name %> </b></td>
+    <td><b>Item Price <%= item.item_price %> </b></td>
+    <td><b>Quantity <%= item.quantity %></td> </b></td>
+    <td><b>Total_price <%= item.total_price %> </b></td>
   </tr>
-
-  <% items = LineItem.where(order_id: @order.id) %>
-  <% items.each do |item| %>
-    <% product = Product.find_by(id: item.product_id) %>
-    <tr>
-      <td><%= product.name %></td>
-      <td><%= item.item_price %></td>
-      <td><%= item.quantity %></td>
-      <td><%= item.total_price %></td>
-    </tr>
   <% end %>
-
-  <tr>
-    <td colspan=3><b>Total amount:</b></td>
-    <td><b><%= @total_amount %></b></td>
-  </tr>
-
+  <h3> Thank you and have a great day ! </h3>
+  <h3> E-Commerce 2019 inc </h3>
   </body>
 </html>     
 
