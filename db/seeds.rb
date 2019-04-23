@@ -32,7 +32,8 @@ cat3 = Category.find_or_create_by! name: 'Furniture'
 ## PRODUCTS
 
 puts "Re-creating Products ..."
-
+Review.destroy_all
+User.destroy_all
 Product.destroy_all
 
 shirt = cat1.products.create!({
@@ -139,6 +140,7 @@ u1 = User.create!(name: 'John', email: 'john@john.com', password: 'asd', passwor
 Review.create!(product_id: shirt.id, user_id: u1.id, description: 'I miss Zellers, those were the days', rating: "1")
 Review.create!(product_id: pants.id, user_id: u1.id, description: "Gotta have them all !", rating: "4")
 Review.create!(product_id: hats.id, user_id: u1.id, description: "Limol!", rating: "5")
+Review.create!(product_id: hats.id, user_id: u1.id, description: "Limol!213123123", rating: "5")
 
 
 puts "DONE!"

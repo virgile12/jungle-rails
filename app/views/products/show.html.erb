@@ -24,7 +24,24 @@
           <dd><%= @product.price %></dd>
         </dl>
       </div>
+     
     </div>
+    
+    <div class="products">
+      <%= render @reviews %>
+    </div>
+
+    <div class="col-sm-8">
+    <%= form_for(:review, url:"/products/#{@product.id}/reviews") do |r| %>
+      <dl class="dl-horizontal">
+        <dt><%= r.label :rating %></dt>
+        <dd><%= r.select :rating, [1,2,3,4,5], class: 'form-review' %></dd>
+        <dt><br><%= r.label :description %></dt>
+        <dd><br><%= r.text_area :description, class: 'form-review' %></dd>
+        <dd><br><%= r.submit "Submit", class: 'btn btn-info' %></dd>
+    <% end %>
+  </div>
+
 
   </article>
 

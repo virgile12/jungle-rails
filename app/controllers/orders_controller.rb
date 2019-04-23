@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
       )
       @receipt.save
       redirect_to order, notice: 'Order Sucessfully Submitted'
+
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end 

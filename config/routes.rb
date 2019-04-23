@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   
   root to: 'products#index'
   
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show] do
+    resources :reviews, only: [:create] 
+  end
+
   resources :categories, only: [:show]
 
   resource :cart, only: [:show] do
@@ -28,6 +31,7 @@ Rails.application.routes.draw do
 
 
   resources :receipts, only: [:create, :show]
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
