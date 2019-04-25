@@ -1,7 +1,9 @@
 class CartsController < ApplicationController
 
+
   def show
-    @wiggle = User.find(session[:user_id])
+      redirect to: '/login' unless @wiggle = User.find(session[:user_id]) if session[:user_id]
+    
   end
 
   def add_item
